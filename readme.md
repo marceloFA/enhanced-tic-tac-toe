@@ -1,7 +1,7 @@
 # Enhanced Tic-tac-toe
 
 [React docs](https://reactjs.org/tutorial/tutorial.html) teaches how to build a simple tic-tac-toe app and suggests as exercise some enhancments on this app.
-This is a version that includes those enahncements. They are:
+This is a version that includes those enhancements. They are:
 
 * Display the location for each move in the format (col, row) in the move history list.
 * Bold the currently selected item in the move list.
