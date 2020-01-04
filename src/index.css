@@ -46,5 +46,11 @@ ol, ul {
 }
 
 .game-info {
-  margin-left: 20px;
+  margin-left: 25px;
+}
+
+.game-info ol li{
+  margin-top:5px;
+  margin-bottom:5px;
+
 }
