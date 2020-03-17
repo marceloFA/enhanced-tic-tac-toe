@@ -76,14 +76,15 @@ class Game extends React.Component {
 			return;
 		}
 
-		squares[i] = this.state.xIsNext ? "x" : "O";
+		squares[i] = this.getSquareMark();
 
-		const moveIndexes = this.geMoveIndexes(i);
+		const moveIndexes = this.getMoveIndexes(i);
 
 		this.setState(
 			{
 				history: history.concat([{squares:squares, moveIndexes:moveIndexes}]),
 				stepNumber : history.length,
+				// make current move line bold
 				xIsNext: !this.state.xIsNext
 			}
 		);
@@ -96,6 +97,10 @@ class Game extends React.Component {
 				xIsNext: (step % 2) === 0
 			}
 		);
+	}
+
+	getSquareMark(){
+		return this.state.xIsNext ? "X" : "O";
 	}
 
 	getMoveIndexes(i){
@@ -130,17 +135,33 @@ class Game extends React.Component {
 				const row = history[move].moveIndexes.row;
 				const column = history[move].moveIndexes.column;
 				const description = move ? 
-				`Go to move #${move} on row: ${row} column: ${column}` : 
-				'Go to game start';
+				`Move #${move}: ${move % 2 === 1? "X" : "O"} on row ${row} column ${column}` : 
+				'Game start';
+				const currentStep = this.state.stepNumber === move;
 
-				return (
-					<li key={move}>
-						<button onClick={() => this.jumpTo(move)}>
-							{description}
-						</button>
-					</li>
-				);
+				if(currentStep){
+					return(
+						<li key={move}>
+							
+								<button onClick={() => this.jumpTo(move)}>
+									<strong>
+										{description}
+									</strong>
+								</button>
+						</li>
+					)
+				}
+				else{
+					return (
+						<li key={move}>
+							<button onClick={() => this.jumpTo(move)}>
+								{description}
+							</button>
+						</li>
+					);
+				}
 			}
+				
 		);
 
 		let status;
