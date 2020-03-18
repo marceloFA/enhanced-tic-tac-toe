@@ -99,8 +99,14 @@ class Game extends React.Component {
 		);
 	}
 
-	getSquareMark(){
-		return this.state.xIsNext ? "X" : "O";
+	getSquareMark(move=undefined){
+		if (move){
+			return move % 2 === 1? "X" : "O"
+		}
+		else{
+			return this.state.xIsNext ? "X" : "O";
+		}
+		
 	}
 
 	getMoveIndexes(i){
@@ -135,7 +141,7 @@ class Game extends React.Component {
 				const row = history[move].moveIndexes.row;
 				const column = history[move].moveIndexes.column;
 				const description = move ? 
-				`Move #${move}: ${move % 2 === 1? "X" : "O"} on row ${row} column ${column}` : 
+				`Move #${move}: ${this.getSquareMark(move)} on row ${row} column ${column}` : 
 				'Game start';
 				const currentStep = this.state.stepNumber === move;
 
